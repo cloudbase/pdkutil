@@ -22,7 +22,7 @@ setup(
     url="https://github.com/cloudbase/pdkutil",
     packages=find_packages(),
     long_description=read('README.rst'),
-    install_requires=['cliff','python-barbicanclient'],
+    install_requires=['cliff', 'python-barbicanclient'],
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Programming Language :: Python',

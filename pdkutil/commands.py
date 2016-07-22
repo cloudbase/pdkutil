@@ -15,9 +15,7 @@
 
 import logging
 
-from barbicanclient import barbican as barbican_client
 from cliff.show import ShowOne
-from cliff.command import Command
 import pdkutil
 
 
@@ -30,7 +28,7 @@ class Get(ShowOne):
         parser = super(Get, self).get_parser(prog_name)
         pdkutil.PDKUtil().build_parser(parser)
         parser.add_argument('container_reference',
-                             metavar='<container-reference>')
+                            metavar='<container-reference>')
         return parser
 
     def take_action(self, parsed_args):
@@ -49,11 +47,12 @@ class Get(ShowOne):
                            'Status',
                            'Secrets'
                            )
+                items = container.secrets.items()
                 data = (container.container_ref,
                         container.name,
                         container.created,
                         container.status,
-                        '\n'.join(value.secret_ref for key, value in container.secrets.items())
+                        '\n'.join(value.secret_ref for key, value in items)
                         )
         return (columns, data)
 
@@ -91,8 +90,8 @@ class Store(ShowOne):
                 name=u'Secret ' + str(secret_number), payload=secret_payload)
             secret_reference = secret.store()
             my_container.add(str(secret_number),
-                barbican.secrets.get(secret_reference))
-            secret_number+=1
+                             barbican.secrets.get(secret_reference))
+            secret_number += 1
         container_reference = my_container.store()
 
         columns = ('PDK_file',

@@ -70,8 +70,8 @@ class PDKUtil(App):
         # Return a dictionary with only the populated (not None) values
         return dict((k, v) for (k, v) in six.iteritems(kwargs) if v)
 
-    def create_keystone_session(
-        self, args, api_version, kwargs_dict, auth_type):
+    def create_keystone_session(self, args, api_version, kwargs_dict,
+                                auth_type):
         # Make sure we have the correct arguments to function
         self.check_auth_arguments(args, api_version, raise_exc=True)
 
@@ -250,6 +250,7 @@ class PDKUtil(App):
             self.stderr.write(self.parser.format_usage())
             return 1
         return super(PDKUtil, self).run(argv)
+
 
 def main(argv=sys.argv[1:]):
     myapp = PDKUtil()
