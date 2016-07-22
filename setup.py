@@ -1,42 +1,38 @@
-#!/usr/bin/env python
-
-PROJECT = 'pdkutil'
-
-VERSION = '1.0'
-
+import git
+import os
 from setuptools import setup, find_packages
 
-long_description = ''
+
+def get_git_version():
+    g = git.Git(".")
+    return g.describe(tags=True)
+
+
+def read(fname):
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
-    name=PROJECT,
-    version=VERSION,
-
-    description='Stores files in barbican containers',
-    long_description=long_description,
-
-    author='Simona Iuliana Toader',
-
-    classifiers=['Development Status :: 3 - Alpha',
-                 'License :: OSI Approved :: Apache Software License',
-                 'Programming Language :: Python',
-                 'Programming Language :: Python :: 2',
-                 'Programming Language :: Python :: 2.7',
-                 'Programming Language :: Python :: 3',
-                 'Programming Language :: Python :: 3.2',
-                 'Intended Audience :: Developers',
-                 'Environment :: Console',
-                 ],
-
-    platforms=['Any'],
-
-    scripts=[],
-
-    provides=[],
+    name="pdkutil",
+    version=get_git_version(),
+    author="Simona Iuliana Toader",
+    author_email="info@cloudbasesolutions.com",
+    description=("Stores a pdk file to a barbican container."),
+    license="Apache 2.0",
+    keywords="pdk shieldedvms windows",
+    url="https://github.com/cloudbase/pdkutil",
+    packages=find_packages("src", exclude="samples"),
+    package_dir={'': 'src'},
+    # Note: this extension is compiled in Visual Studio
+    package_data={},
+    long_description=read('README.rst'),
     install_requires=['cliff','python-barbicanclient'],
-
-    namespace_packages=[],
-    packages=find_packages(),
+    classifiers=[
+        'Development Status :: 5 - Production/Stable',
+        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
+        'License :: OSI Approved :: Apache Software License',
+        'Topic :: System :: Systems Administration'
+    ],
     include_package_data=True,
 
     entry_points={
