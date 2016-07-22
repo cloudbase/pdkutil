@@ -1,11 +1,5 @@
-import git
 import os
 from setuptools import setup, find_packages
-
-
-def get_git_version():
-    g = git.Git(".")
-    return g.describe(tags=True)
 
 
 def read(fname):
@@ -13,7 +7,7 @@ def read(fname):
 
 setup(
     name="pdkutil",
-    version=get_git_version(),
+    version='0.0.2',
     author="Simona Iuliana Toader",
     author_email="info@cloudbasesolutions.com",
     description=("Stores a pdk file to a barbican container."),
